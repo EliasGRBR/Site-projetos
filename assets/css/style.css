@@ -1,0 +1,36 @@
+*{
+    font-family: 'Oswald', sans-serif;
+}
+.navbar-brand{
+    font-size: 3rem;
+    z-index: 999999999999;
+    position: absolute;
+    height: 86px;
+    background: #000000 !important;
+    top: 0;
+    padding: 0.1rem 1rem 1rem 1rem;
+    border-bottom: 44px solid #212529!important;
+    font-weight: bold;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+a.nav-link{
+    font-size: 1.2rem;
+}
+main{
+    min-height: 100vh;
+    background: #000000bd;
+}
+
+footer{
+    background: #212529!important;
+    color:#fff;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1.2rem;
+}
+@media screen and (max-width: 992px) {
+    .navbar-collapse {
+        padding-top: 2rem;
+    }
+}
