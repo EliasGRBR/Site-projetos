@@ -1,0 +1,151 @@
+<html dir="ltr" lang="pt" class="" style="background-image:linear-gradient(to bottom, transparent 0%, #000000c9 0%), url(alarm.jpg); color:white;background-size: cover;text-transform: uppercase;
+font-weight: bold;
+font-family: system-ui;
+background-position: center;
+">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="relogio.png" type="image/png">
+    <title>Relógio Digital</title>
+</head>
+<body style="text-align: center;">
+    <div class="relogio" style="
+    margin: 0 auto;
+    margin-top: 10rem;">
+        <h1 style="margin: 0 auto;text-align: center;font-size: 60px;"></h1>
+        <h1 class="cumprimento"></h1>
+    </div>
+    <div id="horaDefinida">
+        <h1></h1>
+    </div>
+    <div class="despertador">
+        <h1>Defina um horario para despertar:</h1>
+        <input type="time" id="time" style="font-size: 47px;">
+        <button id="definirHora" style="font-size: 47px;">
+            Definir
+        </button><br>
+        <button id="limpar" style="font-size: 47px; margin-top: 10px;">
+            Limpar
+        </button>
+    </div>
+    <div style="margin-top: 30px;font-size: 34px;" class="stop-despertador">
+        <button style="visibility: hidden;" id="stop">
+            <span style="
+            margin-top: 11px;
+            font-size: 30px;
+        ">Parar despertador</span>
+        </button>
+    </div>
+    <div>
+        <h1 id="frase" style="visibility: hidden;">HORA DE ACORDAR!!!</h1>
+    </div>
+    <audio style="visibility: hidden;" controls id="audio">
+        <source src="music.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+<script>
+window.onload = function(){
+    var audio = document.getElementById("audio");
+    var btn_parar = document.querySelector("#stop");
+    var frase = document.querySelector("#frase");
+    var html = document.querySelector("html");
+    horaDesp = null;
+    var btnDefinir = document.querySelector("#definirHora");
+    var inputTime = document.querySelector("#time");
+    var btnReset = document.querySelector("#limpar");
+function queHoras(){
+    let today = new Date();
+    let mes = 1;
+    mes += today.getMonth();
+        if(mes < 10){
+            mes = "0" + mes.toString();
+        }
+    let dia = today.getDate();
+    let ano = today.getFullYear();
+    let hora = today.getHours();
+    let minutos = today.getMinutes();
+        if(minutos < 10){
+            minutos = "0" + minutos.toString();
+        }
+    let segundos = today.getSeconds()
+        if(segundos < 10){
+            segundos = "0" + segundos.toString();
+        }
+    document.querySelector(".relogio h1").innerHTML = "Hoje é dia: " +dia+"/"+mes+"/"+ano+" e são exatamente: " +hora+":"+minutos+":"+segundos;
+    if(hora < 10){
+        return "0" + hora+":"+minutos;
+    }
+    else{
+        return hora+":"+minutos;
+    }
+}
+function cumprimento(){
+    let today = new Date();
+    let hora = today.getHours();
+    let cumprimento = document.querySelector(".cumprimento");
+    if (hora <= 12) {
+        cumprimento.innerHTML = "Bom Dia!!!";
+    }
+    if (hora > 12 && hora < 18) {
+        cumprimento.innerHTML = "Boa Tarde!!!";
+    }
+    if(hora >= 18 && hora <= 23){
+        cumprimento.innerHTML = "Boa Noite!!!";
+    }
+}
+function stopDespertador(){
+    audio.pause();
+    btn_parar.style.visibility = "hidden";
+    frase.style.visibility = "hidden";
+    document.querySelector("#horaDefinida h1").innerHTML = null;
+    setHour(null);
+}
+
+function despertador(){
+    let horaatual = queHoras();
+        if(horaDesp == horaatual){
+            audio.play();
+            btn_parar.style.visibility = "visible";
+            frase.style.visibility = "visible";
+            document.querySelector(".despertador input").value = null;         
+               if (frase.style.color == "white") {
+                    frase.style.color = "silver";
+                    }
+                    else{
+                    frase.style.color = "white";
+                }
+        } 
+    }
+btnReset.addEventListener("click", function(){
+    setHour(null);
+    document.querySelector(".despertador input").value = null;
+    document.querySelector("#horaDefinida h1").innerHTML = null;
+});
+btn_parar.addEventListener("click", function() {
+                stopDespertador();                
+});
+btnDefinir.addEventListener("click",function(){
+    setHour(inputTime.value);
+    if(horaDesp.length != 0){
+    document.querySelector("#horaDefinida h1").innerHTML = "Horario de despertar: " + inputTime.value;
+    document.querySelector(".despertador input").value = null;
+    }
+});
+function setHour(hour){
+    horaDesp = hour;
+}
+setInterval(() => {
+    queHoras();
+    despertador();
+    cumprimento();
+}, 500);
+}
+</script>
+
+<footer style="text-align: center;">
+<a style="color:#fff; font-style: italic;" href="../../index.html">Voltar</a>
+</footer>
+
+  </body></html>

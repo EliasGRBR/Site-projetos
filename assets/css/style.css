@@ -1,6 +1,12 @@
+/* Geral */
 *{
     font-family: 'Oswald', sans-serif;
+    color:#fff;
 }
+p{
+    font-size: 1.2rem;
+}
+/* Menu */
 .navbar-brand{
     font-size: 3rem;
     z-index: 999999999999;
@@ -17,18 +23,35 @@
 a.nav-link{
     font-size: 1.2rem;
 }
+/* Principal */
 main{
-    min-height: 100vh;
+    min-height: 87.5vh;
     background: #000000bd;
 }
-
+.bg-black{
+    background-color: #000000;
+}
+.projetos .card{
+    box-shadow: 1px 6px 21px 0px #000000;
+    margin-bottom: 2rem;
+}
+.projetos .col-md-4:first-child .card img{
+    max-width: 270px;
+}
+.projetos .col-md-4:nth-child(2) .card {
+    height: 31rem;
+}
+/* Rodapé */
 footer{
     background: #212529!important;
-    color:#fff;
     padding-top: 1rem;
     padding-bottom: 1rem;
     font-size: 1.2rem;
 }
+.assinatura{
+    text-decoration: underline;
+}
+/* medias */
 @media screen and (max-width: 992px) {
     .navbar-collapse {
         padding-top: 2rem;

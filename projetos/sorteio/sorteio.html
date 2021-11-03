@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="shortcut icon" href="cartola.png" type="image/png">
+    <title>Sorteio Cartola</title>
+    <style>
+      .jumbotron{
+        min-height: 100vh;
+        background:linear-gradient(to bottom, transparent 0%, #0000008c 0%), url(futebol.jpg);
+        color: white;
+        background-size: cover;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-family: system-ui;
+        background-position: top center;
+        padding-top: 7rem;
+      }
+      .btn{
+        font-size: 1.5em;
+      }
+      html{
+        max-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-5 text-center">
+            <h1>Escolha o esquema tatico</h1>
+            <select class="form-control" id="tatico">
+              <option value="4-3-3">4-3-3</option>
+              <option value="4-4-2">4-4-2</option>
+              <option value="5-4-1">5-4-1</option>
+              <option value="5-3-2">5-3-2</option>
+              <option value="4-5-1">4-5-1</option>
+              <option value="3-5-2">3-5-2</option>
+              <option value="3-4-3">3-4-3</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <h1>Goleiros</h1>
+            <textarea class="form-control" name="goleiro" id="goleiro" cols="30" rows="10"></textarea>
+          </div>
+          <div class="col-md-3">
+            <h1>Zagueiros</h1>
+            <textarea class="form-control" name="zagueiro" id="zagueiro" cols="30" rows="10"></textarea>
+          </div>
+          <div class="col-md-3">
+            <h1>Meias</h1>
+            <textarea class="form-control" name="meias" id="meias" cols="30" rows="10"></textarea>
+          </div>
+          <div class="col-md-3">
+            <h1>Atacantes</h1>
+            <textarea class="form-control" name="atacantes" id="atacantes" cols="30" rows="10"></textarea>
+          </div>
+          <div class="col-12 text-center mt-4">
+            <button id="btn-confirm"class="btn btn-success btn-lg">Confirmar</button>
+          </div>
+          <div id="resultado" class="mt-4" style="display: none;">
+            <div class="row">
+              <div class="col-md-3">
+                <h4>Melhor opção de goleiro:</h4>
+                <ul id="goleiroResult">
+
+                </ul>
+              </div>
+            <div class="col-md-3">
+              <h4>Melhores opções de zagueiros:</h4>
+              <ul id="zagueiroResult">
+                  
+              </ul>
+            </div>
+            <div class="col-md-3">
+              <h4>Melhores opções de meias:</h4>
+              <ul id="meiaResult">
+                  
+              </ul>                
+            </div>
+            <div class="col-md-3">
+              <h4>Melhores opções de atacantes:</h4>
+              <ul id="atacanteResult">
+                  
+              </ul>                
+            </div>                        
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+
+<script>
+window.onload = () => {
+      function getRandomIntInclusive(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function vazio(value){
+  if(value == ""){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+function sortearGoleiro(){
+    gol = getRandomIntInclusive(0,goleiros.length - 1);
+    if(!vazio(goleiros[gol])){
+    console.log("-------Goleiro--------");
+    console.log(goleiros[gol]);
+    document.querySelector("#goleiroResult").innerHTML = `<li>${goleiros[gol]}</li>`;
+  }
+}
+function zag(){
+    let j = new Array;
+    console.log("-------Zagueiros--------");
+    for (let i = 0; i < esquema[0]; i++) {
+        j = getRandomIntInclusive(0,zagueiros.length - 1);
+        if (zagueiros[j] == undefined) {
+            ata = getRandomIntInclusive(0,zagueiros.length);
+        }
+        else{
+          if(!vazio(goleiros[gol])){
+            console.log(zagueiros[j]);
+            document.querySelector("#zagueiroResult").innerHTML += `<li>${zagueiros[j]}</li>`;
+            var indice = zagueiros.indexOf(zagueiros[j]);
+            zagueiros.splice(indice, 1);
+          }
+        }
+    }
+}
+function meia(){
+    let j = new Array;
+    console.log("--------Meias--------");
+    for (let i = 0; i < esquema[1]; i++) {
+        j = getRandomIntInclusive(0,meias.length - 1);
+        if (meias[j] == undefined) {
+            j = getRandomIntInclusive(0,meias.length);
+        }
+        else{
+          if(!vazio(goleiros[gol])){
+            console.log(meias[j]);
+            document.querySelector("#meiaResult").innerHTML += `<li>${meias[j]}</li>`;
+            var indice = meias.indexOf(meias[j]);
+            meias.splice(indice, 1);
+          }
+        }
+    }
+}
+function atacante(){
+    let ata = new Array;
+    console.log("--------Atacantes--------");
+    for (let i = 0; i < esquema[2]; i++) {
+        ata = getRandomIntInclusive(0,atacantes.length - 1);
+        if (atacantes[ata] == undefined) {
+            ata = getRandomIntInclusive(0,atacantes.length);
+        }
+        else{
+          if(!vazio(goleiros[gol])){
+            console.log(atacantes[ata]);
+            document.querySelector("#atacanteResult").innerHTML += `<li>${atacantes[ata]}</li>`;
+            var indice = atacantes.indexOf(atacantes[ata]);
+            atacantes.splice(indice, 1);
+          }
+        }
+    }
+}
+function sortear(){
+  document.querySelector("#resultado").style.display = "block";
+    sortearGoleiro();
+    zag();
+    meia();
+    atacante();
+}
+document.querySelector("#btn-confirm").addEventListener("click", function(){
+      esquema = document.querySelector("#tatico").value.split("-");
+      goleiros = document.querySelector("#goleiro").value.split("\n");
+      zagueiros = document.querySelector("#zagueiro").value.split("\n");
+      meias = document.querySelector("#meias").value.split("\n");
+      atacantes = document.querySelector("#atacantes").value.split("\n");
+
+      document.querySelector("#zagueiroResult").innerHTML = null;
+      document.querySelector("#meiaResult").innerHTML = null;
+      document.querySelector("#atacanteResult").innerHTML = null;
+  
+  sortear();
+  })
+}      
+</script>
+
+<footer style="text-align: center; margin-top:2rem;">
+  <a style="color:#fff; text-decoration: underline; font-style: italic;" href="../../index.html">Voltar</a>
+  </footer>
+</body>
+</html>
