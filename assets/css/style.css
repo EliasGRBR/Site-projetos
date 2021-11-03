@@ -51,9 +51,10 @@ footer{
 .assinatura{
     text-decoration: underline;
 }
+.card{
+    border: 0;
+}
 /* medias */
 @media screen and (max-width: 992px) {
-    .navbar-collapse {
-        padding-top: 2rem;
-    }
+
 }
