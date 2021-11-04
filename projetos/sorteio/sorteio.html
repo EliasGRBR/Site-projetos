@@ -106,7 +106,7 @@ window.onload = () => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function vazio(value){
-  if(value === "" || value === " " || value == null){
+  if(value == "" || value == " " || value == null || value.length <= 0){
     return true;
   }
   else{
@@ -122,56 +122,74 @@ function sortearGoleiro(){
   }
 }
 function zag(){
-    let j = new Array;
+    var j = new Array;
+    let count = 0;
     console.log("-------Zagueiros--------");
     for (let i = 0; i < esquema[0]; i++) {
-        j = getRandomIntInclusive(0,zagueiros.length - 1);
-        if (zagueiros[j] == undefined) {
-            ata = getRandomIntInclusive(0,zagueiros.length);
+        let j = getRandomIntInclusive(0,zagueiros.length - 1);
+        if(count < 100){
+          while(zagueiros[j] == undefined || vazio(zagueiros[j] || count >= 100)){
+              j = getRandomIntInclusive(0,zagueiros.length - 1);
+              console.log("while");
+              count++;
+            }
+        }
+        if (zagueiros[j] == undefined || vazio(zagueiros[j])) {
+            j = getRandomIntInclusive(0,zagueiros.length - 1);
         }
         else{
-          if(!vazio(goleiros[gol])){
             console.log(zagueiros[j]);
             document.querySelector("#zagueiroResult").innerHTML += `<li>${zagueiros[j]}</li>`;
-            var indice = zagueiros.indexOf(zagueiros[j]);
+            let indice = zagueiros.indexOf(zagueiros[j]);
             zagueiros.splice(indice, 1);
-          }
         }
     }
 }
 function meia(){
-    let j = new Array;
+    var k = new Array;
+    let count = 0;
     console.log("--------Meias--------");
     for (let i = 0; i < esquema[1]; i++) {
-        j = getRandomIntInclusive(0,meias.length - 1);
-        if (meias[j] == undefined) {
-            j = getRandomIntInclusive(0,meias.length);
+        k = getRandomIntInclusive(0,meias.length - 1);
+        if(count < 100){
+          while(meias[k] == undefined || vazio(meias[k] || count >= 100)){
+              k = getRandomIntInclusive(0,meias.length - 1);
+              console.log("while");
+              count++;
+            }
+        }
+        if (meias[k] == undefined || vazio(meias[k])) {
+            k = getRandomIntInclusive(0,meias.length -1);
         }
         else{
-          if(!vazio(goleiros[gol])){
-            console.log(meias[j]);
-            document.querySelector("#meiaResult").innerHTML += `<li>${meias[j]}</li>`;
-            var indice = meias.indexOf(meias[j]);
+            console.log(meias[k]);
+            document.querySelector("#meiaResult").innerHTML += `<li>${meias[k]}</li>`;
+            let indice = meias.indexOf(meias[k]);
             meias.splice(indice, 1);
-          }
         }
     }
 }
 function atacante(){
-    let ata = new Array;
+  let count = 0;
+    var ata = new Array;
     console.log("--------Atacantes--------");
     for (let i = 0; i < esquema[2]; i++) {
         ata = getRandomIntInclusive(0,atacantes.length - 1);
-        if (atacantes[ata] == undefined) {
-            ata = getRandomIntInclusive(0,atacantes.length);
+        if(count < 100){
+          while(atacantes[ata] == undefined || vazio(atacantes[ata] || count >= 100)){
+              ata = getRandomIntInclusive(0,atacantes.length - 1);
+              console.log("while");
+              count++;
+            }
+        }
+        if (atacantes[ata] == undefined || vazio(atacantes[ata])) {
+            ata = getRandomIntInclusive(0,atacantes.length -1);
         }
         else{
-          if(!vazio(goleiros[gol])){
             console.log(atacantes[ata]);
             document.querySelector("#atacanteResult").innerHTML += `<li>${atacantes[ata]}</li>`;
-            var indice = atacantes.indexOf(atacantes[ata]);
+            let indice = atacantes.indexOf(atacantes[ata]);
             atacantes.splice(indice, 1);
-          }
         }
     }
 }
@@ -188,7 +206,7 @@ document.querySelector("#btn-confirm").addEventListener("click", function(){
       zagueiros = document.querySelector("#zagueiro").value.split("\n");
       meias = document.querySelector("#meias").value.split("\n");
       atacantes = document.querySelector("#atacantes").value.split("\n");
-
+      
       document.querySelector("#zagueiroResult").innerHTML = null;
       document.querySelector("#meiaResult").innerHTML = null;
       document.querySelector("#atacanteResult").innerHTML = null;
