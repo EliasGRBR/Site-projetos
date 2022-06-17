@@ -66,6 +66,9 @@ main{
 .projetos .col-md-4:nth-child(2) .card {
     height: 32.5rem;
 }
+.box-shadow{
+    box-shadow: 1px 6px 21px 0px #000000;
+}
 /* Rodapé */
 footer{
     background: #212529!important;
@@ -76,7 +79,7 @@ footer{
 .assinatura{
     text-decoration: underline;
 }
-.projetos .card{
+.animation{
     border: 0;
     display: none;
     transition: 0.5s;
@@ -126,6 +129,14 @@ footer{
 
 .card:hover{
     transform: scale(1.05);
+    transition: 0.5s;
+}
+
+.outros:hover{
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+.outros{
     transition: 0.5s;
 }
 /* medias */
